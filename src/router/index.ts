@@ -12,7 +12,8 @@ const routes: RouteRecordRaw[] = [
     name: 'Home',
     component: () => import('@/view/home/index.vue'),
     meta: {
-      title: '首页'
+      title: '首页',
+      authentication: true
     }
   },
   {
@@ -32,6 +33,7 @@ const router: Router = createRouter({
 
 // 路由拦截器
 router.beforeEach(async (to, from, next) => {
+  window.$loadingBar?.start()
   if (
     to.matched.some((record) => record.meta.authentication) &&
     to.meta.authentication
@@ -52,7 +54,7 @@ router.beforeEach(async (to, from, next) => {
 })
 
 router.afterEach(() => {
-  // window.$loading?.finish()
+  window.$loadingBar?.finish()
 })
 
 export function setupRouter(app: App) {

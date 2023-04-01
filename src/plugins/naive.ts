@@ -31,7 +31,9 @@ import {
   NBadge,
   NMessageProvider,
   NNotificationProvider,
-  NDialogProvider
+  NDialogProvider,
+  NCheckboxGroup,
+  NCheckbox
 } from 'naive-ui'
 
 const naive = create({
@@ -66,7 +68,9 @@ const naive = create({
     NSelect,
     NP,
     NResult,
-    NBadge
+    NBadge,
+    NCheckbox,
+    NCheckboxGroup
   ]
 })
 
