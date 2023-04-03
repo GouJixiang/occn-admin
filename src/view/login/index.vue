@@ -1,27 +1,42 @@
 <template>
   <div class="login-page w-full h-full">
     <div class="container">
-      <div class="image-box"></div>
+      <div class="image-box">
+        <div class="theme-switch">
+          <n-switch v-model:value="active">
+            <template #checked-icon> 🌙 </template>
+            <template #unchecked-icon> ☀ </template>
+          </n-switch>
+        </div>
+      </div>
       <div class="form-box">
         <div class="box-header w-full">
           <h1 class="title">OCCN CG</h1>
           <h2>开箱即用的前后端代码生成工具</h2>
           <h3>Vue3 / Typescript / tailwindcss / Golang</h3>
         </div>
-        <transition name="login-register-fade" mode="out-in">
-          <LoginForm v-if="isLogin" @update-is-login="updateIsLogin" />
-          <RegisterForm v-else @update-is-login="updateIsLogin" />
-        </transition>
+        <div class="form-title"
+          ><span>{{ formTitle }}</span></div
+        >
+        <LoginForm v-if="isLogin" @update-is-login="updateIsLogin" />
+        <RegisterForm v-else @update-is-login="updateIsLogin" />
       </div>
     </div>
+    <footer>occn.top | yangxy</footer>
   </div>
 </template>
 
 <script setup lang="ts">
 import { LoginForm, RegisterForm } from './components'
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 
+const active = ref<boolean>(false)
 const isLogin = ref<boolean>(true)
+const formTitle = computed(() => {
+  if (isLogin.value) return '账密登录'
+  else return '用户注册'
+})
+
 /* 切换登录和更新状态 */
 function updateIsLogin(value: boolean) {
   isLogin.value = value
@@ -34,17 +49,23 @@ $container-width: 1200px;
 .login-page {
   background: linear-gradient(to right, #e1eec3, #f05053) no-repeat;
   background-size: cover;
+
+  footer {
+    position: absolute;
+    bottom: 20px;
+    width: 100%;
+    font-size: 16px;
+    //font-weight: bold;
+    color: white;
+    text-align: center;
+  }
 }
 
-.login-register-fade-enter,
-.login-register-fade-leave-to {
-  opacity: 0;
-  transform: translateX(350px);
-}
-
-.login-register-fade-enter-active,
-.login-register-fade-leave-active {
-  transition: all 0.5s ease;
+.form-title {
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 70px;
+  color: #f05053;
 }
 
 .container {

@@ -20,7 +20,9 @@
         <n-checkbox-group>
           <n-checkbox value="read">我已阅读</n-checkbox>
         </n-checkbox-group>
-        <a href="#" class="read-a">《用户使用说明》</a>
+        <a class="read-a" @click="showUserInstruction = true"
+          >《用户使用说明》</a
+        >
       </n-form-item>
       <n-form-item>
         <n-space class="w-full" justify="center">
@@ -29,6 +31,53 @@
         </n-space>
       </n-form-item>
     </n-form>
+    <!-- 用户须知 -->
+    <n-modal
+      v-model:show="showUserInstruction"
+      :mask-closable="false"
+      :auto-focus="false"
+      class="user-instruction-model"
+    >
+      <n-card
+        style="width: 600px"
+        title="用户使用说明"
+        :bordered="false"
+        size="medium"
+        role="card"
+        aria-modal="true"
+        closable
+        @close="showUserInstruction = false"
+      >
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Adipisci
+        aliquid consequatur eum exercitationem hic ipsa itaque laudantium
+        mollitia officiis quae quia quis quo quos rerum, sit. Aut id laborum
+        similique!Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+        Adipisci aliquid consequatur eum exercitationem hic ipsa itaque
+        laudantium mollitia officiis quae quia quis quo quos rerum, sit. Aut id
+        laborum similique!Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Adipisci aliquid consequatur eum exercitationem hic ipsa itaque
+        laudantium mollitia officiis quae quia quis quo quos rerum, sit. Aut id
+        laborum similique!Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Adipisci aliquid consequatur eum exercitationem hic ipsa itaque
+        laudantium mollitia officiis quae quia quis quo quos rerum, sit. Aut id
+        laborum similique!Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Adipisci aliquid consequatur eum exercitationem hic ipsa itaque
+        laudantium mollitia officiis quae quia quis quo quos rerum, sit. Aut id
+        laborum similique!Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Adipisci aliquid consequatur eum exercitationem hic ipsa itaque
+        laudantium mollitia officiis quae quia quis quo quos rerum, sit. Aut id
+        laborum similique!Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Adipisci aliquid consequatur eum exercitationem hic ipsa itaque
+        laudantium mollitia officiis quae quia quis quo quos rerum, sit. Aut id
+        laborum similique!Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Adipisci aliquid consequatur eum exercitationem hic ipsa itaque
+        laudantium mollitia officiis quae quia quis quo quos rerum, sit. Aut id
+        laborum similique!Lorem ipsum dolor sit amet, consectetur adipisicing
+        elit. Adipisci aliquid consequatur eum exercitationem hic ipsa itaque
+        laudantium mollitia officiis quae quia quis quo quos rerum, sit. Aut id
+        laborum similique!
+      </n-card>
+    </n-modal>
   </div>
 </template>
 
@@ -37,6 +86,8 @@ import { ref } from 'vue'
 
 const code = ref<string>('获取验证码')
 const codeDisable = ref<boolean>(false)
+const showUserInstruction = ref<boolean>(false)
+
 const emits = defineEmits(['updateIsLogin'])
 
 let time = ref(60)
@@ -65,8 +116,13 @@ function handleRegister() {
 
 <style scoped lang="scss">
 .login-form {
-  margin-top: 50px;
   width: 100%;
+}
+
+.user-instruction-model {
+  border-radius: 20px;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
+    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .read-a {

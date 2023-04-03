@@ -1,5 +1,9 @@
 <template>
-  <n-config-provider :theme-overrides="themeOverrides" class="h-full">
+  <n-config-provider
+    :theme-overrides="themeOverrides"
+    :theme="[]"
+    class="h-full"
+  >
     <naive-provider>
       <router-view></router-view>
     </naive-provider>
@@ -9,7 +13,7 @@
 
 <script setup lang="ts">
 import { NaiveProvider } from '@/components/common'
-import type { GlobalThemeOverrides } from 'naive-ui'
+import { GlobalThemeOverrides, darkTheme } from 'naive-ui'
 // 临时修改全局主题基本色，主题切换后续开发
 const themeOverrides: GlobalThemeOverrides = {
   common: {
