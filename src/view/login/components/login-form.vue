@@ -83,6 +83,7 @@
 
 <script setup lang="ts">
 import { ref } from 'vue'
+import router from '@/router'
 
 const code = ref<string>('获取验证码')
 const codeDisable = ref<boolean>(false)
@@ -106,7 +107,9 @@ function handleGetCode() {
 }
 
 function handleSubmit() {
-  window.$message?.error('登陆失败')
+  // window.$message?.error('登陆失败')
+  window.localStorage.setItem('dns_token', 'admin')
+  router.push('/')
 }
 
 function handleRegister() {

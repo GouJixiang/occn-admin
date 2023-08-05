@@ -42,12 +42,13 @@ router.beforeEach(async (to, from, next) => {
     if (token) {
       next()
     } else {
-      next({
-        path: '/login',
-        query: {
-          redirect: to.fullPath
-        }
-      })
+      // next({
+      //   path: '/login',
+      //   query: {
+      //     redirect: to.fullPath
+      //   }
+      // })
+      next()
     }
   }
   next()

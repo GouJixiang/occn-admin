@@ -13,7 +13,7 @@
 
 <script setup lang="ts">
 import { NaiveProvider } from '@/components/common'
-import { GlobalThemeOverrides, darkTheme } from 'naive-ui'
+import { GlobalThemeOverrides } from 'naive-ui'
 // 临时修改全局主题基本色，主题切换后续开发
 const themeOverrides: GlobalThemeOverrides = {
   common: {

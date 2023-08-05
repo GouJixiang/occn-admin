@@ -12,6 +12,12 @@ html, body, #app {
     height: 100%;
 }
 
+#app {
+    width: 100%;
+    height: 100%;
+    /*background-color: #cb4747;*/
+}
+
 /** 解决因tailwindcss按钮默认样式导致的naive-ui按钮不显示背景色问题 */
 @layer base {
     button, [type='button'], [type='reset'], [type='submit'] {
