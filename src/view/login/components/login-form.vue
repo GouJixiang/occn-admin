@@ -20,8 +20,8 @@
         <n-checkbox-group>
           <n-checkbox value="read">我已阅读</n-checkbox>
         </n-checkbox-group>
-        <a class="read-a" @click="showUserInstruction = true"
-          >《用户使用说明》</a
+        <n-el tag="a" class="read-a" @click="showUserInstruction = true"
+          >《用户隐私说明》</n-el
         >
       </n-form-item>
       <n-form-item>
@@ -40,7 +40,7 @@
     >
       <n-card
         style="width: 600px"
-        title="用户使用说明"
+        title="用户隐私说明"
         :bordered="false"
         size="medium"
         role="card"
@@ -107,9 +107,8 @@ function handleGetCode() {
 }
 
 function handleSubmit() {
-  // window.$message?.error('登陆失败')
-  window.localStorage.setItem('dns_token', 'admin')
-  router.push('/')
+  window.localStorage.setItem('token', 'admin')
+  router.push({ name: 'dashboard-staging' })
 }
 
 function handleRegister() {
@@ -124,15 +123,16 @@ function handleRegister() {
 
 .user-instruction-model {
   border-radius: 20px;
-  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px,
-    rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
+  box-shadow: rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0 7px 13px -3px,
+    rgba(0, 0, 0, 0.2) 0px -3px 0px inset;
 }
 
 .read-a {
-  color: #f05053;
+  color: var(--primary-color);
+  cursor: pointer;
 
   &:hover {
-    color: #ef8385;
+    color: var(--primary-color-hover);
   }
 }
 </style>

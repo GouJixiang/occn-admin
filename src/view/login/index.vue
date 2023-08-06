@@ -1,5 +1,5 @@
 <template>
-  <div class="login-page w-full h-full">
+  <n-el tag="div" class="login-page w-full h-full">
     <div class="container">
       <div class="image-box">
         <div class="theme-switch">
@@ -11,19 +11,19 @@
       </div>
       <div class="form-box">
         <div class="box-header w-full">
-          <h1 class="title">OCCN CG</h1>
-          <h2>开箱即用的前后端代码生成工具</h2>
-          <h3>Vue3 / Typescript / tailwindcss / Golang</h3>
+          <n-el tag="h1" class="title">OCCN CG</n-el>
+          <n-el tag="h2">开箱即用的前后端代码生成工具</n-el>
+          <n-el tag="h3">Vue3 / Typescript / tailwindcss / Golang</n-el>
         </div>
-        <div class="form-title"
-          ><span>{{ formTitle }}</span></div
+        <n-el tag="div" class="form-title"
+          ><span>{{ formTitle }}</span></n-el
         >
         <LoginForm v-if="isLogin" @update-is-login="updateIsLogin" />
         <RegisterForm v-else @update-is-login="updateIsLogin" />
       </div>
     </div>
     <footer>occn.top | yangxy</footer>
-  </div>
+  </n-el>
 </template>
 
 <script setup lang="ts">
@@ -47,7 +47,7 @@ function updateIsLogin(value: boolean) {
 $container-width: 1200px;
 
 .login-page {
-  background: linear-gradient(to right, #e1eec3, #f05053) no-repeat;
+  background: linear-gradient(to right, #e1eec3, var(--primary-color)) no-repeat;
   background-size: cover;
 
   footer {
@@ -65,7 +65,7 @@ $container-width: 1200px;
   font-size: 18px;
   font-weight: bold;
   line-height: 70px;
-  color: #f05053;
+  color: var(--primary-color);
 }
 
 .container {
@@ -102,8 +102,8 @@ $container-width: 1200px;
 
   .box-header {
     text-align: center;
-    border-bottom: 3px solid #f05053;
-    color: #f05053;
+    border-bottom: 3px solid var(--primary-color);
+    color: var(--primary-color);
     padding: 5px;
 
     & > h1 {

@@ -9,16 +9,53 @@ import { App } from 'vue'
 const routes: RouteRecordRaw[] = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
+    redirect: { path: '/dashboard' },
     component: () => import('@/view/home/index.vue'),
     meta: {
       title: '首页',
       authentication: true
-    }
+    },
+    children: [
+      {
+        path: '/dashboard',
+        name: 'dashboard',
+        meta: {
+          title: '仪表盘',
+          authentication: true
+        },
+        children: [
+          {
+            path: '/dashboard/staging',
+            name: 'dashboard-staging',
+            component: () => import('@/view/dashboard/staging/index.vue'),
+            meta: {
+              title: '工作台'
+            }
+          },
+          {
+            path: '/dashboard/board',
+            name: 'dashboard-board',
+            component: () => import('@/view/dashboard/board/index.vue'),
+            meta: {
+              title: '数据看板'
+            }
+          }
+        ]
+      },
+      {
+        path: '/applications',
+        name: 'applications',
+        component: () => import('@/view/dashboard/staging/index.vue'),
+        meta: {
+          title: '应用中心'
+        }
+      }
+    ]
   },
   {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     component: () => import('@/view/login/index.vue'),
     meta: {
       title: '登录'
@@ -34,24 +71,26 @@ const router: Router = createRouter({
 // 路由拦截器
 router.beforeEach(async (to, from, next) => {
   window.$loadingBar?.start()
-  if (
+  if (to.name === 'login') next()
+  else if (
     to.matched.some((record) => record.meta.authentication) &&
     to.meta.authentication
   ) {
-    const token = localStorage.getItem('dns_token')
+    const token = localStorage.getItem('token')
     if (token) {
       next()
+      document.title = 'OCCN - ' + to.meta.title
     } else {
-      // next({
-      //   path: '/login',
-      //   query: {
-      //     redirect: to.fullPath
-      //   }
-      // })
-      next()
+      next({
+        path: '/login',
+        query: {
+          redirect: to.fullPath
+        }
+      })
     }
+  } else {
+    next()
   }
-  next()
 })
 
 router.afterEach(() => {

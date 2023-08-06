@@ -2,7 +2,6 @@ import { App } from 'vue'
 import {
   create,
   NConfigProvider,
-  NGlobalStyle,
   NButton,
   NLayout,
   NLayoutHeader,
@@ -34,7 +33,14 @@ import {
   NNotificationProvider,
   NDialogProvider,
   NCheckboxGroup,
-  NCheckbox
+  NCheckbox,
+  NMenu,
+  NBreadcrumb,
+  NBreadcrumbItem,
+  NDropdown,
+  NAvatar,
+  NTooltip,
+  NDataTable
 } from 'naive-ui'
 
 const naive = create({
@@ -44,7 +50,6 @@ const naive = create({
     NMessageProvider,
     NNotificationProvider,
     NDialogProvider,
-    NGlobalStyle,
     NButton,
     NLayout,
     NLayoutHeader,
@@ -72,7 +77,14 @@ const naive = create({
     NResult,
     NBadge,
     NCheckbox,
-    NCheckboxGroup
+    NCheckboxGroup,
+    NMenu,
+    NBreadcrumb,
+    NBreadcrumbItem,
+    NDropdown,
+    NAvatar,
+    NTooltip,
+    NDataTable
   ]
 })
 
