@@ -10,7 +10,7 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/',
     name: 'home',
-    redirect: { path: '/dashboard' },
+    redirect: { name: 'dashboard-staging' },
     component: () => import('@/view/home/index.vue'),
     meta: {
       title: '首页',
