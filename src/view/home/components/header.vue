@@ -115,6 +115,7 @@ import {
   Language
 } from '@vicons/ionicons5'
 import { useRouter } from 'vue-router'
+import router from '@/router'
 
 const route = useRouter()
 const emits = defineEmits(['update:collapsed'])
