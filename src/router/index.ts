@@ -46,10 +46,20 @@ const routes: RouteRecordRaw[] = [
       {
         path: '/applications',
         name: 'applications',
-        component: () => import('@/view/dashboard/staging/index.vue'),
         meta: {
-          title: '应用中心'
-        }
+          title: '应用中心',
+          authentication: true
+        },
+        children: [
+          {
+            path: '/applications/manager',
+            name: 'applications-manager',
+            component: () => import('@/view/applications/manager/index.vue'),
+            meta: {
+              title: '应用管理'
+            }
+          }
+        ]
       }
     ]
   },

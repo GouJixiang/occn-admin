@@ -3,7 +3,7 @@
     <div class="container">
       <div class="image-box">
         <div class="theme-switch">
-          <n-switch v-model:value="active">
+          <n-switch v-model:value="active" @update:value="handleChange">
             <template #checked-icon> 🌙 </template>
             <template #unchecked-icon> ☀ </template>
           </n-switch>
@@ -11,9 +11,9 @@
       </div>
       <div class="form-box">
         <div class="box-header w-full">
-          <n-el tag="h1" class="title">OCCN CG</n-el>
-          <n-el tag="h2">开箱即用的前后端代码生成工具</n-el>
-          <n-el tag="h3">Vue3 / Typescript / tailwindcss / Golang</n-el>
+          <n-el tag="h1" class="title">OCCN Admin</n-el>
+          <n-el tag="h2">一站式应用管理中台</n-el>
+          <n-el tag="h3">Vue3 / Vite / Typescript / Spring Cloud</n-el>
         </div>
         <n-el tag="div" class="form-title"
           ><span>{{ formTitle }}</span></n-el
@@ -29,9 +29,14 @@
 <script setup lang="ts">
 import { LoginForm, RegisterForm } from './components'
 import { computed, ref } from 'vue'
+import { themeOptionsStore } from '@/store'
 
-const active = ref<boolean>(false)
+const themeStore = themeOptionsStore()
+const active = ref<boolean>(!themeStore.isDarkTheme)
 const isLogin = ref<boolean>(true)
+const bgColor = computed(() => {
+  return themeStore.isDarkTheme ? 'black' : 'white'
+})
 const formTitle = computed(() => {
   if (isLogin.value) return '账密登录'
   else return '用户注册'
@@ -40,6 +45,10 @@ const formTitle = computed(() => {
 /* 切换登录和更新状态 */
 function updateIsLogin(value: boolean) {
   isLogin.value = value
+}
+
+function handleChange() {
+  themeStore.isDarkTheme = !active.value
 }
 </script>
 
@@ -56,7 +65,6 @@ $container-width: 1200px;
     width: 100%;
     font-size: 16px;
     //font-weight: bold;
-    color: white;
     text-align: center;
   }
 }
@@ -73,7 +81,7 @@ $container-width: 1200px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: white;
+  background-color: v-bind(bgColor);
   width: 1200px;
   height: 600px;
   display: flex;

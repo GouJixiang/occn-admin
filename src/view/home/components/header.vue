@@ -51,6 +51,23 @@
       </n-tooltip>
       <n-tooltip trigger="hover">
         <template #trigger>
+          <n-button
+            quaternary
+            :focusable="false"
+            class="h-full"
+            :onclick="handleThemeChange"
+          >
+            <template #icon>
+              <n-icon :size="20"
+                ><Sunny v-if="isDarkTheme" /> <Moon v-else
+              /></n-icon>
+            </template>
+          </n-button>
+        </template>
+        <span>深色模式</span>
+      </n-tooltip>
+      <n-tooltip trigger="hover">
+        <template #trigger>
           <n-button quaternary :focusable="false" class="h-full">
             <template #icon>
               <n-icon :size="20"><Language /></n-icon>
@@ -61,11 +78,19 @@
       </n-tooltip>
       <n-tooltip trigger="hover">
         <template #trigger>
-          <n-button quaternary :focusable="false" class="h-full">
-            <template #icon>
-              <n-icon :size="20"><Notifications /></n-icon>
-            </template>
-          </n-button>
+          <n-badge
+            :value="2"
+            :max="99"
+            :offset="[-8, 17]"
+            processing
+            class="h-full"
+          >
+            <n-button quaternary :focusable="false" class="h-full">
+              <template #icon>
+                <n-icon :size="20"><Notifications /></n-icon>
+              </template>
+            </n-button>
+          </n-badge>
         </template>
         <span>消息</span>
       </n-tooltip>
@@ -90,7 +115,7 @@
             size="large"
             src="https://img.syt5.com/2021/0720/20210720092412855.jpg.420.420.jpg"
           />
-          <span class="user_name">Admin</span>
+          <span class="user_name"></span>
         </n-button>
       </n-dropdown>
     </n-space>
@@ -112,10 +137,13 @@ import {
   LogOutOutline as LogoutIcon,
   Notifications,
   Home,
-  Language
+  Language,
+  Sunny,
+  Moon
 } from '@vicons/ionicons5'
 import { useRouter } from 'vue-router'
 import router from '@/router'
+import { themeOptionsStore } from '@/store'
 
 const route = useRouter()
 const emits = defineEmits(['update:collapsed'])
@@ -134,7 +162,8 @@ const renderIcon = (icon: Component) => {
     })
   }
 }
-
+const themeStore = themeOptionsStore()
+const isDarkTheme = computed(() => themeStore.isDarkTheme)
 // 全屏标志
 const fullscreen = ref<boolean>(false)
 const options = [
@@ -160,6 +189,10 @@ const options = [
  */
 function updateCollapsed() {
   emits('update:collapsed', !props.collapsed)
+}
+
+function handleThemeChange() {
+  themeStore.isDarkTheme = !isDarkTheme.value
 }
 
 /**

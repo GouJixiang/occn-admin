@@ -55,7 +55,10 @@ import {
   DesktopOutline,
   CalendarOutline,
   LibraryOutline,
-  AppsOutline
+  AppsOutline,
+  Clipboard,
+  Server,
+  Grid
 } from '@vicons/ionicons5'
 
 const route = useRouter()
@@ -82,7 +85,26 @@ const menuOptions = [
   {
     label: '应用中心',
     key: 'applications',
-    icon: renderIcon(AppsOutline)
+    icon: renderIcon(AppsOutline),
+    children: [
+      {
+        label: '应用管理',
+        key: 'applications-manager',
+        icon: renderIcon(Clipboard)
+      }
+    ]
+  },
+  {
+    label: '服务器中心',
+    key: 'server',
+    icon: renderIcon(Server),
+    children: [
+      {
+        label: '服务器管理',
+        key: 'server-manager',
+        icon: renderIcon(Grid)
+      }
+    ]
   }
 ]
 
@@ -103,9 +125,6 @@ function handleUpdateMenu(_key: string) {
 .my-content {
   padding: 20px 20px 10px 20px;
   height: calc(100vh - 58px - 48px);
-}
-.my-footer {
-  background-color: white;
 }
 .logo-title {
   color: var(--primary-color);
