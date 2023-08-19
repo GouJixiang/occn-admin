@@ -111,10 +111,7 @@
         @select="handleAvatarSelect"
       >
         <n-button quaternary class="h-full">
-          <n-avatar
-            size="large"
-            src="https://img.syt5.com/2021/0720/20210720092412855.jpg.420.420.jpg"
-          />
+          <n-avatar size="large" :src="avatarJpg" />
           <span class="user_name"></span>
         </n-button>
       </n-dropdown>
@@ -144,6 +141,7 @@ import {
 import { useRouter } from 'vue-router'
 import router from '@/router'
 import { themeOptionsStore } from '@/store'
+import avatarJpg from '@/assets/images/avatar.jpg'
 
 const route = useRouter()
 const emits = defineEmits(['update:collapsed'])
