@@ -41,7 +41,8 @@ import {
   NDropdown,
   NAvatar,
   NTooltip,
-  NDataTable
+  NDataTable,
+  NProgress
 } from 'naive-ui'
 
 const naive = create({
@@ -86,7 +87,8 @@ const naive = create({
     NDropdown,
     NAvatar,
     NTooltip,
-    NDataTable
+    NDataTable,
+    NProgress
   ]
 })
 

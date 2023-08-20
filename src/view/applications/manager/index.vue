@@ -11,6 +11,7 @@
       </n-grid-item>
       <n-grid-item>
         <n-data-table
+          :row-key="getKey"
           :data="data"
           :columns="columns"
           :pagination="paginationReactive"
@@ -21,8 +22,9 @@
 </template>
 
 <script lang="ts" setup>
-import { h, reactive } from 'vue'
+import { h, reactive, ref } from 'vue'
 import { DataTableColumns, NButton, NSpace, NTag, NBadge } from 'naive-ui'
+import Server from './service'
 
 interface AppConfigVO {
   id: string
@@ -46,6 +48,10 @@ const paginationReactive = reactive({
     paginationReactive.page = 1
   }
 })
+
+function getKey() {
+  return 'id'
+}
 
 const createColumns = ({
   editApp,
@@ -163,39 +169,18 @@ const createColumns = ({
   ]
 }
 
-const data: AppConfigVO[] = reactive<AppConfigVO[]>([
-  {
-    id: '1',
-    name: 'AI OCCN',
-    host: 'ai.occn.top',
-    port: '80,443',
-    tag: 'AI,ChatGPT',
-    status: 'running'
-  },
-  {
-    id: '2',
-    name: 'DDNS-GO',
-    host: 'ddns.occn.top',
-    port: '80',
-    tag: '网络,内网穿透',
-    status: 'error'
-  },
-  {
-    id: '3',
-    name: 'QT-Box',
-    host: 'docs.occn.top',
-    port: '80,443',
-    tag: 'C++,QT,桌面应用',
-    status: 'stop'
-  }
-])
+let data = ref([])
+
+Server.getAppList().then((res) => {
+  data.value = res.data
+})
 
 const columns = createColumns({
   editApp(rowData) {
-    window.$message?.info('send mail to ' + rowData.host)
+    window.$message?.info('编辑' + rowData.name)
   },
   viewApp(rowData) {
-    window.$message?.info('send mail to ' + rowData.host)
+    window.$message?.info('查看' + rowData.name)
   }
 })
 </script>

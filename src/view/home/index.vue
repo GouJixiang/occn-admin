@@ -23,6 +23,8 @@
         :options="menuOptions"
         :collapsed-width="64"
         :collapsed-icon-size="22"
+        :render-icon="renderIcon"
+        :watch-props="['defaultExpandedKeys']"
         @update:value="handleUpdateMenu"
       />
     </n-layout-sider>
@@ -47,69 +49,38 @@
 </template>
 
 <script setup lang="ts">
-import { Component, computed, ref, h } from 'vue'
+import { computed, ref, h } from 'vue'
 import Header from '@/view/home/components/header.vue'
 import { useRouter } from 'vue-router'
-import { NIcon } from 'naive-ui'
-import {
-  DesktopOutline,
-  CalendarOutline,
-  LibraryOutline,
-  AppsOutline,
-  Clipboard,
-  Server,
-  Grid
-} from '@vicons/ionicons5'
+import { NIcon, MenuOption } from 'naive-ui'
+import useCurrentInstance from '@/hooks/useCurrentInstance'
+import Service from '@/view/home/service'
 
 const route = useRouter()
 const collapsed = ref<boolean>(false)
 const menuActiveKey = computed(() => route.currentRoute.value.name as string)
-const menuOptions = [
-  {
-    label: '仪表盘',
-    key: 'dashboard',
-    icon: renderIcon(DesktopOutline),
-    children: [
-      {
-        label: '工作台',
-        key: 'dashboard-staging',
-        icon: renderIcon(CalendarOutline)
-      },
-      {
-        label: '数据看板',
-        key: 'dashboard-board',
-        icon: renderIcon(LibraryOutline)
-      }
-    ]
-  },
-  {
-    label: '应用中心',
-    key: 'applications',
-    icon: renderIcon(AppsOutline),
-    children: [
-      {
-        label: '应用管理',
-        key: 'applications-manager',
-        icon: renderIcon(Clipboard)
-      }
-    ]
-  },
-  {
-    label: '服务器中心',
-    key: 'server',
-    icon: renderIcon(Server),
-    children: [
-      {
-        label: '服务器管理',
-        key: 'server-manager',
-        icon: renderIcon(Grid)
-      }
-    ]
-  }
-]
+const menuOptions = ref([])
 
-function renderIcon(iconComponent: Component) {
-  return () => h(NIcon, null, { default: () => h(iconComponent) })
+Service.getMenuApi().then((res) => {
+  menuOptions.value = res.data
+})
+
+function renderIcon(menuOption: MenuOption) {
+  const { globalProperties } = useCurrentInstance()
+  const icons = menuOption.icons as never as string
+  const iconPrefix = icons.split(':')[0]
+  const iconComponent = icons.split(':')[1]
+  const component =
+    iconPrefix === 'antd'
+      ? globalProperties.$antdIcon[iconComponent]
+      : globalProperties.$icons5[iconComponent]
+  return h(
+    NIcon,
+    {
+      component: component
+    },
+    { default: () => null }
+  )
 }
 
 /**

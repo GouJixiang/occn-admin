@@ -11,7 +11,6 @@ export default defineConfig({
     viteMockServe({ mockPath: 'mock', enable: true })
   ],
   base: './',
-  // 设置路径别名
   resolve: {
     alias: [
       {

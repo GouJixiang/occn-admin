@@ -60,6 +60,24 @@ const routes: RouteRecordRaw[] = [
             }
           }
         ]
+      },
+      {
+        path: '/hardware',
+        name: 'hardware',
+        meta: {
+          title: '服务器中心',
+          authentication: true
+        },
+        children: [
+          {
+            path: '/hardware/manager',
+            name: 'hardware-manager',
+            component: () => import('@/view/hardware/manager/index.vue'),
+            meta: {
+              title: '服务器管理'
+            }
+          }
+        ]
       }
     ]
   },
