@@ -1,6 +1,6 @@
-# NET-TOOLS-VUE
+# OCCN Admin
 
-基于 `Vue3 + Vite + TypeScript + Naive UI` 打造的网络工具集🌏
+基于 `Vue3 + Vite + TypeScript + Naive UI` 打造的网络资产管理平台🌏
 
 ## 一、运行项目及编译打包
 项目使用 **yarn** 作为包管理器，如需启动项目，要先安装yarn。yarn安装命令：
