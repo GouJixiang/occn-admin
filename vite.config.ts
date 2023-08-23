@@ -8,7 +8,7 @@ export default defineConfig({
   plugins: [
     vue(),
     eslintPlugin(),
-    viteMockServe({ mockPath: 'mock', enable: true })
+    viteMockServe({ mockPath: 'mock', localEnabled: true })
   ],
   base: './',
   resolve: {
