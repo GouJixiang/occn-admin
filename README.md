@@ -21,9 +21,9 @@ yarn build
 在安装了Docker的前提下，在项目根目录执行：
 ```shell
 # 打包镜像
-docker build -f ./docker/Dockerfile -t net-tools-vue:v0.1 .
+docker build -f ./docker/Dockerfile -t occn-admin:v0.1 .
 # 启动打包好的镜像
-docker run -itd -p 80:80 net-tools-vue:v0.1
+docker run -itd -p 80:80 occn-admin:v0.1
 ```
 访问地址：http://127.0.0.1/
 
