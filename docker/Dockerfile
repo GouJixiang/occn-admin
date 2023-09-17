@@ -5,7 +5,7 @@ ENV WORKDIR=/occn-admin
 WORKDIR $WORKDIR
 COPY . $WORKDIR/
 ARG version
-RUN yarn install && yarn build
+RUN yarn config set registry http://registry.npm.taobao.org/ && yarn install && yarn build
 
 FROM nginx:alpine as prod
 RUN mkdir /occn-admin

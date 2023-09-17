@@ -1,6 +1,6 @@
-import { createApp } from 'vue'
+import { App, createApp } from 'vue'
 import './style.css'
-import App from './App.vue'
+import AppElement from './App.vue'
 import { setupNaive } from '@/plugins/naive'
 import { setupPinia } from '@/store'
 import { setupRouter } from '@/router'
@@ -25,7 +25,7 @@ function setupIcon(app: App) {
 }
 
 async function bootstrap() {
-  const app = createApp(App)
+  const app = createApp(AppElement)
   /* 挂在Pinia */
   setupPinia(app)
   /* 挂载UI框架 */

@@ -92,7 +92,7 @@ const createColumns = ({
       key: 'status',
       align: 'center',
       render(row) {
-        let status = 'warning'
+        let status = 'default' as 'default' | 'success' | 'warning' | 'error'
         switch (row.status) {
           case 'running':
             status = 'success'

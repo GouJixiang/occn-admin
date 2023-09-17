@@ -4,7 +4,7 @@ class Service {
   /**
    * 获取菜单
    */
-  static getMenuApi = (): Promise<never> => mockRequest.get('/menu')
+  static getMenuApi = (): Promise<any> => mockRequest.get('/menu')
 }
 
 export default Service
